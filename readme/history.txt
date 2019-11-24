@@ -1,3 +1,6 @@
 
+2019.11.25
++ show result in a separate cell of statusbar
+
 2019.05.21
 initial version
