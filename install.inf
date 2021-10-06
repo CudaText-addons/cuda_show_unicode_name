@@ -7,4 +7,9 @@ homepage=https://github.com/CudaText-addons/cuda_show_unicode_name
 
 [item1]
 section=events
-events=on_caret
+events=on_start
+
+[item2]
+section=commands
+caption=Show Unicode Name\Toggle
+method=toggle_display
