@@ -1,5 +1,5 @@
-2020.10.06 (patch by @JairoMartinezA)
-+ add: toggle function.
+2021.10.06 (patch by @JairoMartinezA)
++ add: command "Toggle", and using of config file plugins.ini
 
 2019.11.25
 + show result in a separate cell of statusbar
