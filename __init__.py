@@ -4,6 +4,7 @@ from unicodedata import name
 
 plugin_name = __name__
 MYTAG = 101
+BAR_H = app.app_proc(app.PROC_GET_MAIN_STATUSBAR, '')
 enabled = True
 
 fn_config = os.path.join(app.app_path(app.APP_DIR_SETTINGS), 'plugins.ini')
@@ -35,16 +36,16 @@ class Command:
         pass
 
     def msg(self, s):
-        app.statusbar_proc('main', app.STATUSBAR_SET_CELL_TEXT, tag=MYTAG, value=s)
+        app.statusbar_proc(BAR_H, app.STATUSBAR_SET_CELL_TEXT, tag=MYTAG, value=s)
 
     def set_enabled(self):
         if enabled:
-            app.statusbar_proc('main', app.STATUSBAR_ADD_CELL, index=0, tag=MYTAG)
-            app.statusbar_proc('main', app.STATUSBAR_SET_CELL_AUTOSIZE, tag=MYTAG, value=True)
+            app.statusbar_proc(BAR_H, app.STATUSBAR_ADD_CELL, index=0, tag=MYTAG)
+            app.statusbar_proc(BAR_H, app.STATUSBAR_SET_CELL_AUTOSIZE, tag=MYTAG, value=True)
             app.app_proc(app.PROC_SET_EVENTS, plugin_name + ';' + 'on_caret,' + ';;')
             self.process_unicode(app.ed)
         else:
-            app.statusbar_proc('main', app.STATUSBAR_DELETE_CELL, tag=MYTAG)
+            app.statusbar_proc(BAR_H, app.STATUSBAR_DELETE_CELL, tag=MYTAG)
 
     def toggle_display(self):
         global enabled
