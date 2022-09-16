@@ -1,3 +1,7 @@
+
+2022.09.17
+- fix: avoid using deprecated API
+
 2021.10.06 (patch by @JairoMartinezA)
 + add: command "Toggle", and using of config file plugins.ini
 
