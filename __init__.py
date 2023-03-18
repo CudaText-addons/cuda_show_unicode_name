@@ -24,6 +24,9 @@ class Command:
     def on_caret(self, ed_self):
         self.process_unicode(ed_self)
 
+    def on_focus(self, ed_self):
+        self.process_unicode(ed_self)
+
     def on_start(self, ed_self):
         # Created to initilize this plugin config
         pass
@@ -35,7 +38,7 @@ class Command:
         if self.enabled:
             app.statusbar_proc(BAR_H, app.STATUSBAR_ADD_CELL, index=0, tag=MYTAG)
             app.statusbar_proc(BAR_H, app.STATUSBAR_SET_CELL_AUTOSIZE, tag=MYTAG, value=True)
-            app.app_proc(app.PROC_SET_EVENTS, plugin_name + ';' + 'on_caret,' + ';;')
+            app.app_proc(app.PROC_SET_EVENTS, plugin_name + ';' + 'on_caret,on_focus' + ';;')
             self.process_unicode(app.ed)
         else:
             app.statusbar_proc(BAR_H, app.STATUSBAR_DELETE_CELL, tag=MYTAG)
@@ -46,13 +49,16 @@ class Command:
 
         self.set_enabled()
 
-    def process_unicode(self, ed_self):
+    def process_unicode(self, ed_self: app.Editor):
         x, y, x1, y1 = ed_self.get_carets()[0]
         cnt = ed_self.get_line_count()
         if 0<=y<cnt:
-            s = ed_self.get_text_line(y, 2000) #limit max len
-            if x>=len(s):
+            nlen = ed_self.get_line_len(y)
+            if x >= nlen:
                 return self.msg('')
-            s = s[x]
+            s = ed_self.get_text_substr(x, y, x+2, y)
+            if s:
+                s = s[0]
+
             s = ('U+%04x'%ord(s)).upper() +', '+ name(s, '?')
             self.msg(s)

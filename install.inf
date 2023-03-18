@@ -4,6 +4,7 @@ desc=Shows full Unicode name of a character under first caret, in the statusbar
 type=cudatext-plugin
 subdir=cuda_show_unicode_name
 homepage=https://github.com/CudaText-addons/cuda_show_unicode_name
+api=1.0.442
 
 [item1]
 section=events
