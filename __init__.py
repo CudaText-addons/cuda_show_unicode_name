@@ -38,10 +38,12 @@ class Command:
         if self.enabled:
             app.statusbar_proc(BAR_H, app.STATUSBAR_ADD_CELL, index=0, tag=MYTAG)
             app.statusbar_proc(BAR_H, app.STATUSBAR_SET_CELL_AUTOSIZE, tag=MYTAG, value=True)
-            app.app_proc(app.PROC_SET_EVENTS, plugin_name + ';' + 'on_caret,on_focus' + ';;')
             self.process_unicode(app.ed)
         else:
             app.statusbar_proc(BAR_H, app.STATUSBAR_DELETE_CELL, tag=MYTAG)
+
+        act = app.PROC_EVENTS_SUB if self.enabled else app.PROC_EVENTS_UNSUB
+        app.app_proc(act, plugin_name + ';' + 'on_caret,on_focus' + ';;')
 
     def toggle_display(self):
         self.enabled = not self.enabled
